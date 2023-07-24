@@ -1,16 +1,16 @@
 #include <stdarg.h>
 #include <unistd.h>
-#include "holberton.h"
+#include "main.h"
 /**
-  * find_function - function that finds formats for _printf
-  * calls the corresponding function.
-  * @format: format (char, string, int, decimal)
+  * find_format - function that finds print format
+  * by calling corresponding function.
+  * @format: string carring identifier
   * Return: NULL or function associated ;
   */
-int (*find_function(const char *format))(va_list)
+int (*find_format(const char *format))(va_list)
 {
 	unsigned int i = 0;
-	code_f find_f[] = {
+	identifier find_f[] = {
 		{"c", print_char},
 		{"s", print_string},
 		{"i", print_int},
@@ -34,9 +34,9 @@ int (*find_function(const char *format))(va_list)
 	return (NULL);
 }
 /**
-  * _printf - function that produces output according to a format.
+  * _printf - prints string including variables.
   * @format: format (char, string, int, decimal)
-  * Return: size the output text;
+  * Return: number of printed chars;
   */
 int _printf(const char *format, ...)
 {
@@ -57,7 +57,7 @@ int _printf(const char *format, ...)
 		}
 		if (format[i] == '\0')
 			return (cprint);
-		f = find_function(&format[i + 1]);
+		f = find_format(&format[i + 1]);
 		if (f != NULL)
 		{
 			cprint += f(ap);

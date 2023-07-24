@@ -1,30 +1,31 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include "holberton.h"
+#include "main.h"
 /**
 * print_bin - convert to binary
-* @b: number in decinal
-* Return: number of chars printed
+* @b: decimal number
+* Return: number of chars printed(sucess)
 */
 int print_bin(va_list b)
 {
-	unsigned int len, powten, j, digit, n, num;
+	unsigned int lenght, powten, j;
+	unsigned int digit, n, number;
 	int count = 0;
 
 	n = va_arg(b, unsigned int);
 	if (n != 0)
 	{
-		num = n;
-		len = 0;
-		while (num != 0)
+		number = n;
+		lenght = 0;
+		while (number != 0)
 		{
-			num /= 2;
-			len++;
+			number /= 2;
+			lenght++;
 		}
 		powten = 1;
-		for (j = 1; j <= len - 1; j++)
+		for (j = 1; j <= lenght - 1; j++)
 			powten *= 2;
-		for (j = 1; j <= len; j++)
+		for (j = 1; j <= lenght; j++)
 		{
 			digit = n / powten;
 			_putchar(digit + '0');

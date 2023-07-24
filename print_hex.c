@@ -1,34 +1,35 @@
-#include "holberton.h"
+#include "main.h"
 /**
-* print_hex - function that prints an unsigned int in hexadecimal
-* @n: unsigned to be printed
+* print_hex - prints unsigned int in hexadecimal
+* @n: unsigned number to be printed
 * @c: case of printing (0 = lower, 1 = upper)
 * Descriptions: prints unsigned in hexadecimal with _putchar
 * Return: size the output
 */
 int print_hex(unsigned int n, unsigned int c)
 {
-	unsigned int len, powten, j, digit, num;
+	unsigned int lenght, powten;
+	unsigned int j, digit, number;
 	int count = 0;
 	char diff;
 
 	if (n != 0)
 	{
-		num = n;
-		len = 0;
+		number = n;
+		lenght = 0;
 		if (c)
 			diff = 'A' - ':';
 		else
 			diff = 'a' - ':';
-		while (num != 0)
+		while (number != 0)
 		{
-			num /= 16;
-			len++;
+			number /= 16;
+			lenght++;
 		}
 		powten = 1;
-		for (j = 1; j <= len - 1; j++)
+		for (j = 1; j <= lenght - 1; j++)
 			powten *= 16;
-		for (j = 1; j <= len; j++)
+		for (j = 1; j <= lenght; j++)
 		{
 			digit = n / powten;
 			if (digit < 10)
@@ -48,8 +49,8 @@ int print_hex(unsigned int n, unsigned int c)
 	return (count);
 }
 /**
-* print_x - takes an unsigned int an prints it in lowercase hex
-* @x: unsigned int to print
+* print_x - prints HEX in lowercase hex
+* @x: unsigned number to print
 * Descriptions: prints in lowercase hex with _putchar
 * Return: size of the output
 */
@@ -58,8 +59,8 @@ int print_x(va_list x)
 	return (print_hex(va_arg(x, unsigned int), 0));
 }
 /**
-* print_X - takes an unsigned int an prints it in uppercase hex
-* @X: unsigned int to print
+* print_X - prints HEX in uppercase
+* @X: unsigned number to print
 * Descriptions: prints in uppercase hex with _putchar
 * Return: size of the output
 */

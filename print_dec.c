@@ -1,13 +1,13 @@
-#include "holberton.h"
+#include "main.h"
 /**
-* print_dec - function that prints an decimal
-* @d: integer to print
+* print_dec - prints decimaml numbers
+* @d: number to be printed
 * Descriptions: prints digit with _putchar
 * Return: size the output text
 */
 int print_dec(va_list d)
 {
-	int len, powten, j, digit, n, count = 0, num;
+	int lenght, powten, j, digit, n, count = 0, number;
 
 	n = va_arg(d, int);
 	if (n != 0)
@@ -17,17 +17,17 @@ int print_dec(va_list d)
 			_putchar('-');
 			count++;
 		}
-		num = n;
-		len = 0;
-		while (num != 0)
+		number = n;
+		lenght = 0;
+		while (number != 0)
 		{
-			num /= 10;
-			len++;
+			number /= 10;
+			lenght++;
 		}
 		powten = 1;
-		for (j = 1; j <= len - 1; j++)
+		for (j = 1; j <= lenght - 1; j++)
 			powten *= 10;
-		for (j = 1; j <= len; j++)
+		for (j = 1; j <= lenght; j++)
 		{
 			digit = n / powten;
 			if (n < 0)
