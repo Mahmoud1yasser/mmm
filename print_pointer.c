@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "main.h"
 
 /**
@@ -19,53 +20,54 @@ int print_pointer(va_list arg)
 }
 
 /**
- * print_hex_x - prints unsigned int in hexadecimal
+ * print_hexi - prints unsigned int in hexadecimal
  * @ptr: pointer to unsigned number to be printed
  * @c: case of printing (0 = lower, 1 = upper)
  *
  * Description: prints unsigned in hexadecimal with printf
  * Return: size of the output
  */
-int print_hex_x(void *ptr, unsigned int c)
+int print_hexi(void *ptr, unsigned int c)
 {
-    uintptr_t number = (uintptr_t)ptr;
-    unsigned int length = 0, powten;
-    unsigned int j, digit;
-    int count = 0;
-    char diff;
+	uintptr_t number = (uintptr_t)ptr;
+	unsigned int length = 0, powten;
+	unsigned int j, digit;
+	char diff;
 
-    if (ptr != NULL)
-    {
-        if (c)
-            diff = 'A' - ':';
-        else
-            diff = 'a' - ':';
-        while (number != 0)
-        {
-            number /= 16;
-            length++;
-        }
-        powten = 1;
-        for (j = 1; j <= length - 1; j++)
-            powten *= 16;
-        for (j = 1; j <= length; j++)
-        {
-            digit = (unsigned int)(number / powten);
-            if (digit < 10)
-                printf("%c", digit + '0');
-            else
-                printf("%c", digit + '0' + diff);
-            count++;
-            number -= digit * powten;
-            powten /= 16;
-        }
-    }
-    else
-    {
-        printf("(nil)");
-        return (5);
-    }
-    return (count);
+	int count = 0;
+
+	if (ptr != NULL)
+	{
+		if (c)
+			diff = 'A' - ':';
+		else
+			diff = 'a' - ':';
+		while (number != 0)
+		{
+			number /= 16;
+			length++;
+		}
+		powten = 1;
+		for (j = 1; j <= length - 1; j++)
+			powten *= 16;
+		for (j = 1; j <= length; j++)
+		{
+			digit = (unsigned int)(number / powten);
+			if (digit < 10)
+				printf("%c", digit + '0');
+			else
+				printf("%c", digit + '0' + diff);
+			count++;
+			number -= digit * powten;
+			powten /= 16;
+		}
+	}
+	else
+	{
+		printf("(nil)");
+		return (5);
+	}
+	return (count);
 }
 
 /**
@@ -77,7 +79,7 @@ int print_hex_x(void *ptr, unsigned int c)
  */
 int print_x(va_list x)
 {
-	return (print_hex_x(va_arg(x, void *), 0));
+	return (print_hexi(va_arg(x, void *), 0));
 }
 
 /**
@@ -89,5 +91,5 @@ int print_x(va_list x)
  */
 int print_X(va_list X)
 {
-	return (print_hex_x(va_arg(X, void *), 1));
+	return (print_hexi(va_arg(X, void *), 1));
 }
