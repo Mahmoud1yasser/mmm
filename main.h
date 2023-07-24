@@ -20,8 +20,6 @@ int print_octal(va_list o);
 int print_x(va_list x);
 int print_X(va_list X);
 int print_rot13(va_list R);
-int print_pointer(va_list arg);
-int print_hex(void *ptr, unsigned int c);
 
 /**
   * struct code_format - Struct format
