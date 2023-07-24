@@ -28,45 +28,44 @@ int print_pointer(va_list arg)
  */
 int print_hex_x(void *ptr, unsigned int c)
 {
-	unsigned int lenght, powten;
-	unsigned int j, digit, number;
-	char diff;
-	int count = 0;
+    uintptr_t number = (uintptr_t)ptr;
+    unsigned int length = 0, powten;
+    unsigned int j, digit;
+    int count = 0;
+    char diff;
 
-	if (ptr != NULL)
-	{
-		number = (unsigned int)ptr;
-		lenght = 0;
-		if (c)
-			diff = 'A' - ':';
-		else
-			diff = 'a' - ':';
-		while (number != 0)
-			{
-				number /= 16;
-				lenght++;
-			}
-		powten = 1;
-		for (j = 1; j <= lenght - 1; j++)
-			powten *= 16;
-		for (j = 1; j <= lenght; j++)
-		{
-			digit = (unsigned int)ptr / powten;
-			if (digit < 10)
-				printf("%c", digit + '0');
-			else
-				printf("%c", digit + '0' + diff);
-			count++;
-			ptr -= digit * powten;
-			powten /= 16;
-		}
-	}
-	else
-	{
-		printf("(nil)");
-		return (5);
-	}
-	return (count);
+    if (ptr != NULL)
+    {
+        if (c)
+            diff = 'A' - ':';
+        else
+            diff = 'a' - ':';
+        while (number != 0)
+        {
+            number /= 16;
+            length++;
+        }
+        powten = 1;
+        for (j = 1; j <= length - 1; j++)
+            powten *= 16;
+        for (j = 1; j <= length; j++)
+        {
+            digit = (unsigned int)(number / powten);
+            if (digit < 10)
+                printf("%c", digit + '0');
+            else
+                printf("%c", digit + '0' + diff);
+            count++;
+            number -= digit * powten;
+            powten /= 16;
+        }
+    }
+    else
+    {
+        printf("(nil)");
+        return (5);
+    }
+    return (count);
 }
 
 /**
