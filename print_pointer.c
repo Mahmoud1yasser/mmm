@@ -10,12 +10,12 @@
  */
 int print_pointer(va_list arg)
 {
-    void *ptr = va_arg(arg, void *);
+	void *ptr = va_arg(arg, void *);
 
-    if (ptr == NULL)
-        return (printf("(nil)"));
+	if (ptr == NULL)
+		return (printf("(nil)"));
 
-    return (printf("%p", ptr));
+	return (printf("%p", ptr));
 }
 
 /**
@@ -28,45 +28,45 @@ int print_pointer(va_list arg)
  */
 int print_hex(void *ptr, unsigned int c)
 {
-    unsigned int lenght, powten;
-    unsigned int j, digit, number;
-    int count = 0;
-    char diff;
+	unsigned int lenght, powten;
+	unsigned int j, digit, number;
+	char diff;
+	int count = 0;
 
-    if (ptr != NULL)
-    {
-        number = (unsigned int)ptr;
-        lenght = 0;
-        if (c)
-            diff = 'A' - ':';
-        else
-            diff = 'a' - ':';
-        while (number != 0)
-        {
-            number /= 16;
-            lenght++;
-        }
-        powten = 1;
-        for (j = 1; j <= lenght - 1; j++)
-            powten *= 16;
-        for (j = 1; j <= lenght; j++)
-        {
-            digit = (unsigned int)ptr / powten;
-            if (digit < 10)
-                printf("%c", digit + '0');
-            else
-                printf("%c", digit + '0' + diff);
-            count++;
-            ptr -= digit * powten;
-            powten /= 16;
-        }
-    }
-    else
-    {
-        printf("(nil)");
-        return (5);
-    }
-    return (count);
+	if (ptr != NULL)
+	{
+		number = (unsigned int)ptr;
+		lenght = 0;
+		if (c)
+			diff = 'A' - ':';
+		else
+			diff = 'a' - ':';
+		while (number != 0)
+			{
+				number /= 16;
+				lenght++;
+			}
+		powten = 1;
+		for (j = 1; j <= lenght - 1; j++)
+			powten *= 16;
+		for (j = 1; j <= lenght; j++)
+		{
+			digit = (unsigned int)ptr / powten;
+			if (digit < 10)
+				printf("%c", digit + '0');
+			else
+				printf("%c", digit + '0' + diff);
+			count++;
+			ptr -= digit * powten;
+			powten /= 16;
+		}
+	}
+	else
+	{
+		printf("(nil)");
+		return (5);
+	}
+	return (count);
 }
 
 /**
@@ -78,7 +78,7 @@ int print_hex(void *ptr, unsigned int c)
  */
 int print_x(va_list x)
 {
-    return (print_hex(va_arg(x, void *), 0));
+	return (print_hex(va_arg(x, void *), 0));
 }
 
 /**
@@ -90,5 +90,5 @@ int print_x(va_list x)
  */
 int print_X(va_list X)
 {
-    return (print_hex(va_arg(X, void *), 1));
+	return (print_hex(va_arg(X, void *), 1));
 }
