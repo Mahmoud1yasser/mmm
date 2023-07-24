@@ -13,35 +13,26 @@ int print_rot13(va_list R)
 {
 	int j, i, count = 0;
 	char *r;
-
-	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm ";
 
 	r = va_arg(R, char *);
 	if (r == NULL)
-		r = "(NULL)";
+		r = "(null)";
 	for (j = 0; r[j] != '\0'; j++)
 	{
 		char c = r[j];
 
-		if (c >= 'A' && c <= 'Z')
+		for (i = 0; input[i] != '\0'; i++)
 		{
-			i = c - 'A';
-			_putchar(output[i]);
-			count++;
+			if (c == input[i])
+			{
+				_putchar(output[i]);
+				count++;
+				break;
+			}
 		}
-		else if (c >= 'a' && c <= 'z')
-		{
-			i = c - 'a' + 26;
-			_putchar(output[i]);
-			count++;
-		}
-		else if (c == ' ')
-		{
-			_putchar(' ');
-			count++;
-		}
-		else
+		if (input[i] == '\0')
 		{
 			_putchar(c);
 			count++;
