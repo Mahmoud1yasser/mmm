@@ -9,23 +9,35 @@ int print_rot13(va_list R)
 {
 	int j, i, count = 0;
 	char *r;
-	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	r = va_arg(R, char *);
 	if (r == NULL)
-		r = "(null)";
+		r = "(NULL)";
 	for (j = 0; r[j] != '\0'; j++)
 	{
-		for (i = 0; input[i] != '\0'; i++)
+		char c = r[j];
+		if (c >= 'A' && c <= 'Z')
 		{
-			if (r[j] == input[i])
-			{
-				_putchar(output[i]);
-				count++;
-				break;
-			}
-		}
-	}
-	return (count);
+// Uppercase letter, use the input array
+            i = c - 'A';
+            _putchar(output[i]);
+            count++;
+        }
+        else if (c >= 'a' && c <= 'z')
+        {
+            // Lowercase letter, use the input array with offset
+            i = c - 'a' + 26;
+            _putchar(output[i]);
+            count++;
+        }
+        else
+        {
+            // Not a letter, print as is
+            _putchar(c);
+            count++;
+        }
+    }
+    return count;
 }
